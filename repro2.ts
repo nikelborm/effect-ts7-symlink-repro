@@ -87,9 +87,18 @@ writeFileSync(
 	),
 );
 
-const as = await $`cd repro && ../node_modules/.bin/tsc -b`;
+// Doesn't fail as expected
+await $`cd repro && ../node_modules/.bin/tsc -b`;
 
-symlinkSync("./repro", "symlinked-repro"); // ! important later
+rmSync("repro/app/dist", { recursive: true });
+rmSync("repro/lib/dist", { recursive: true });
+rmSync("repro/tsconfig.tsbuildinfo", { recursive: true });
 
-console.log(as);
-rmSync("repro");
+symlinkSync("./repro", "symlinked-repro");
+
+// UNEXPECTED: Fails with: check.ts(4,13): error TS2367: This comparison appears
+// to be unintentional because the types
+// 'import("/home/nikel/effect-ts7-symlink-repro/repro/lib/index").Duration' and
+// 'import("/home/nikel/effect-ts7-symlink-repro/symlinked-repro/lib/dist/index").Duration'
+// have no overlap.
+await $`cd symlinked-repro && ../node_modules/.bin/tsc -b`;
