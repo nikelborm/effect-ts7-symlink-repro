@@ -228,20 +228,17 @@ async function installTsc(): Promise<string> {
 // --------------------------------------------------------------------------- #
 
 async function prepareWorkTree(): Promise<void> {
-	await rm(REAL, { recursive: true, force: true });
-	await rm(LINK, { recursive: true, force: true });
-	await rm(LOGS, { recursive: true, force: true });
+	await Promise.all([REAL,LINK,LOGS].map(path => rm(path, { recursive: true })))
 	await mkdir(REAL, { recursive: true });
 	await mkdir(LOGS, { recursive: true });
 
 	for (const entry of FIXTURE_ENTRIES) {
 		await cp(join(FIXTURE, entry), join(REAL, entry), {
 			recursive: true,
-			preserveTimestamps: true,
 		});
 	}
 
-	await mkdir(join(REAL, "node_modules"), { recursive: true });
+	await mkdir(join(REAL, "node_modules"));
 	await symlink("../lib", join(REAL, "node_modules", "lib"));
 
 	console.log(
