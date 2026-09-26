@@ -97,14 +97,14 @@ function tscBuild(cwd: string) {
 		// Mimics `cd <cwd>` in a shell: spawnSync's `cwd` chdirs the child but
 		// leaves $PWD pointing at the parent directory, while typescript-go's
 		// os.Getwd() prefers $PWD over the real path.
-		{ cwd, env: { ...process.env, PWD: resolve(cwd) }, stdio: "inherit" },
+		{ cwd, env: { PWD: resolve(cwd) }, stdio: "inherit" },
 	);
 	if (error) throw error;
 	if (status !== 0)
 		throw new Error(`tsc -b failed in ${cwd} with exit code ${status}`);
 }
 
-// Doesn't fail as expected
+// works as expected: doesn't fail
 tscBuild("repro");
 
 rmSync("repro/app/dist", { recursive: true });
