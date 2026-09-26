@@ -1,14 +1,14 @@
 {
-  // A workspace package built with `tsc -b` (composite + project references),
-  // exactly like `packages/effect` in Effect: sources in `src/`, declarations
-  // emitted to `dist/`.
-  "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "module": "nodenext",
-    "target": "es2022",
-    "declaration": true
-  },
-  "include": ["src"]
+	// A workspace package built with `tsc -b` (composite + project references),
+	// exactly like `packages/effect` in Effect: sources in `src/`, declarations
+	// emitted to `dist/`.
+	"compilerOptions": {
+		"composite": true,
+		"outDir": "./dist",
+		"rootDir": "./",
+		"module": "nodenext",
+		"target": "es2022",
+		"declaration": true
+	},
+	"include": ["./index.ts"]
 }

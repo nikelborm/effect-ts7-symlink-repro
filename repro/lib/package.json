@@ -1,1 +1,8 @@
-{ "name": "lib", "version": "1.0.0", "type": "module", "exports": { ".": "./src/Duration.ts" } }
+{
+	"name": "lib",
+	"version": "1.0.0",
+	"type": "module",
+	"exports": {
+		".": "./index.ts"
+	}
+}

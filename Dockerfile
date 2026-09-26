@@ -17,7 +17,7 @@
 #  Result: bogus errors through the symlinked cwd, clean through the real path,
 #  clean again when `PWD` is scrubbed from the environment.
 #
-#  See ./repro.sh for the assertions and ./repro for the fixture.
+#  See ./repro.ts for the assertions and ./repro for the fixture.
 # =============================================================================
 
 FROM node:26.10.0-bookworm-slim
@@ -28,10 +28,14 @@ FROM node:26.10.0-bookworm-slim
 ARG TS_VERSION=7.0.2
 RUN npm install --global --no-fund --no-audit typescript@"$TS_VERSION"
 
-COPY --chmod=0755 repro.sh /usr/local/bin/repro.sh
+# The repro is a Bun script; borrow the interpreter from the official image
+# (that image installs bun at /usr/local/bin/bun).
+COPY --from=oven/bun:1.4.2-debian /usr/local/bin/bun /usr/local/bin/bun
+
+COPY --chmod=0755 repro.ts /usr/local/bin/repro.ts
 COPY repro /usr/local/bin/repro
 
-# `tsc` is on PATH, so repro.sh reuses it instead of installing its own copy.
+# `tsc` is on PATH, so repro.ts reuses it instead of installing its own copy.
 ENV TSC=/usr/local/bin/tsc
 
-ENTRYPOINT ["/usr/local/bin/repro.sh"]
+ENTRYPOINT ["bun", "/usr/local/bin/repro.ts"]

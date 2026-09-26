@@ -1,0 +1,10 @@
+{
+	"name": "effect-ts7-symlink-repro",
+	"private": true,
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^7"
+	}
+}
