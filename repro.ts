@@ -3,6 +3,8 @@
 import { mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { $ } from "bun";
 
+// Scroll to the bottom to see the last steps an the actual error
+
 mkdirSync("repro");
 mkdirSync("repro/lib");
 mkdirSync("repro/app");

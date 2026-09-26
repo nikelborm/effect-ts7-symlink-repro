@@ -6,9 +6,5 @@ To repro:
 # installs typescript
 bun install
 
-cd repro
-# doesn't fail as expected
-tsc -b
-
-
+bun repro.ts
 ```
