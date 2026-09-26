@@ -1,0 +1,14 @@
+{
+  // A dependent workspace package (like `@effect/platform-node`): it imports
+  // `lib` by name, so the reference redirect kicks in.
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "module": "nodenext",
+    "target": "es2022",
+    "declaration": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "../lib" }]
+}
