@@ -7,5 +7,5 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
-# repro
-# repro-symlinked
+repro
+repro-symlinked
