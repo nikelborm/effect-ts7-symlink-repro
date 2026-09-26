@@ -1,13 +1,14 @@
 # effect-ts7-symlink-repro
 
-To install dependencies:
+To repro:
 
 ```bash
+# installs typescript
 bun install
-```
 
-To run:
+cd repro
+# doesn't fail as expected
+tsc -b
 
-```bash
-bun run 
+
 ```

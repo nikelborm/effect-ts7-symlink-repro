@@ -1,15 +1,25 @@
 {
-	// The top-level program. It plays the role of a monorepo's "test/tools"
-	// project: it is checked with `noEmit` and reaches the workspace packages
-	// through `paths` aliases that point at their SOURCES.
-	"include": ["check.ts"],
-	"references": [{ "path": "./lib" }, { "path": "./app" }],
-	"compilerOptions": {
-		"composite": true,
-		"noEmit": true,
-		"paths": {
-			"lib": ["./lib/index.ts"],
-			"app": ["./app/index.ts"]
-		}
-	}
+  "include": [
+    "check.ts"
+  ],
+  "references": [
+    {
+      "path": "./lib"
+    },
+    {
+      "path": "./app"
+    }
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "paths": {
+      "lib": [
+        "./lib/index.ts"
+      ],
+      "app": [
+        "./app/index.ts"
+      ]
+    }
+  }
 }
