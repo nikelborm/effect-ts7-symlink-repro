@@ -4,6 +4,9 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+rmSync("repro", { recursive: true });
+rmSync("symlinked-repro", { recursive: true });
+
 // Scroll to the bottom to see the last steps an the actual error
 
 mkdirSync("repro");
