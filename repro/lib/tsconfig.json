@@ -6,9 +6,6 @@
 		"composite": true,
 		"outDir": "./dist",
 		"rootDir": "./",
-		"module": "nodenext",
-		"target": "es2022",
-		"declaration": true
 	},
 	"include": ["./index.ts"]
 }

@@ -7,12 +7,9 @@
 	"compilerOptions": {
 		"composite": true,
 		"noEmit": true,
-		"module": "nodenext",
-		"target": "es2022",
 		"paths": {
 			"lib": ["./lib/index.ts"],
 			"app": ["./app/index.ts"]
-		},
-		"types": []
+		}
 	}
 }
