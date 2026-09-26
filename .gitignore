@@ -8,4 +8,6 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 repro
-repro-symlinked
+symlinked-repro
+bun.lock
+package-lock.json

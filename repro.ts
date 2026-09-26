@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 
+import { spawnSync } from "node:child_process";
 import { mkdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
-import { $ } from "bun";
+import { resolve } from "node:path";
 
 // Scroll to the bottom to see the last steps an the actual error
 
@@ -89,8 +90,22 @@ writeFileSync(
 	),
 );
 
+function tscBuild(cwd: string) {
+	const { status, error } = spawnSync(
+		resolve("node_modules/.bin/tsc"),
+		["-b"],
+		// Mimics `cd <cwd>` in a shell: spawnSync's `cwd` chdirs the child but
+		// leaves $PWD pointing at the parent directory, while typescript-go's
+		// os.Getwd() prefers $PWD over the real path.
+		{ cwd, env: { ...process.env, PWD: resolve(cwd) }, stdio: "inherit" },
+	);
+	if (error) throw error;
+	if (status !== 0)
+		throw new Error(`tsc -b failed in ${cwd} with exit code ${status}`);
+}
+
 // Doesn't fail as expected
-await $`cd repro && ../node_modules/.bin/tsc -b`;
+tscBuild("repro");
 
 rmSync("repro/app/dist", { recursive: true });
 rmSync("repro/lib/dist", { recursive: true });
@@ -100,7 +115,7 @@ symlinkSync("./repro", "symlinked-repro");
 
 // UNEXPECTED: Fails with: check.ts(4,13): error TS2367: This comparison appears
 // to be unintentional because the types
-// 'import("/home/nikel/effect-ts7-symlink-repro/repro/lib/index").Duration' and
-// 'import("/home/nikel/effect-ts7-symlink-repro/symlinked-repro/lib/dist/index").Duration'
+// 'import("/home/evadev/effect-ts7-symlink-repro/repro/lib/index").Duration' and
+// 'import("/home/evadev/effect-ts7-symlink-repro/symlinked-repro/lib/dist/index").Duration'
 // have no overlap.
-await $`cd symlinked-repro && ../node_modules/.bin/tsc -b`;
+tscBuild("symlinked-repro");

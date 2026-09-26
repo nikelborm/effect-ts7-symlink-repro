@@ -4,7 +4,7 @@ To repro:
 
 ```bash
 # installs typescript
-bun install
+npm install
 
-bun repro.ts
+node repro.ts
 ```
