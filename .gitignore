@@ -11,3 +11,4 @@ repro
 symlinked-repro
 bun.lock
 package-lock.json
+TypeScript
