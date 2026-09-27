@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 rmSync("repro", { recursive: true });
 rmSync("symlinked-repro", { recursive: true });
 
-// Scroll to the bottom to see the last steps an the actual error
+// Scroll to the bottom to see the last steps and the actual error
 
 mkdirSync("repro");
 mkdirSync("repro/lib");
